@@ -2,7 +2,7 @@ namespace SimpleLibraryProject.Builders.ClassBuilderData.Templates
 {
     public class SimpleTemplate
     {
-        public static List<string> BuildTemplate()
+        public static async Task<List<string>> BuildTemplate()
         {
             List<string> ret = new();
             ret.Add("<IMPORTREGION>");
