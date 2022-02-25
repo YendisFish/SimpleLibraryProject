@@ -10,11 +10,11 @@ namespace SimpleLibraryProject.Builders
 
         public ClassBuilder(string Namespace, string filename, string className, Dictionary<string, string> values, List<string> imports)
         {
-            this.Namespace = Namespace;
-            this.Filename = filename;
-            this.ClassName = className;
-            this.Values = values;
-            this.Imports = imports;
+            this.Namespace = Namespace ?? "<FIXME>";
+            this.Filename = filename ?? "class";
+            this.ClassName = className ?? "<FIXME>";
+            this.Values = values ?? new Dictionary<string, string>();
+            this.Imports = imports ?? new List<string>();
         }
 
         public static async Task SimpleClass(ClassBuilder builder)
@@ -62,7 +62,27 @@ namespace SimpleLibraryProject.Builders
                     newline.ReplaceLineEndings("||");
                     newline.Replace(", ||", ")");
                 }
+
+                if (line.Contains("<CONSTRUCTORREGION>"))
+                {
+                    foreach (KeyValuePair<string, string> val in builder.Values)
+                    {
+                        result.Add($"this.{val.Key} = {val.Key.ToLower()};");
+                    }
+                }
             }
+
+            string ffn = "";
+            
+            if (builder.Filename.Contains(".cs"))
+            {
+                ffn = builder.Filename;
+            } else if (!builder.Filename.Contains(".cs"))
+            {
+                ffn = builder.Filename + ".cs";
+            }
+
+            await File.WriteAllLinesAsync(ffn, result);
         }
     }
 }
