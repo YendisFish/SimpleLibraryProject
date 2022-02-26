@@ -30,16 +30,19 @@ namespace SimpleLibraryProject.Builders
                     {
                         result.Add($"using {import.Trim()}");
                     }
+                    continue;
                 }
 
                 if (line.Contains("namespace <REPLACEME>"))
                 {
                     result.Add(line.Replace("<REPLACEME>", builder.Namespace));
+                    continue;
                 }
                 
                 if(line.Contains("public class <REPLACEME>")) 
                 {
                     result.Add(line.Replace("<REPLACEME>", builder.ClassName));
+                    continue;
                 }
 
                 if (line.Contains("<VALUEREGION>"))
@@ -48,19 +51,26 @@ namespace SimpleLibraryProject.Builders
                     {
                         result.Add(val.Value + " " + val.Key + " " + " { get; set; }");
                     }
+                    continue;
                 }
 
                 if (line.Contains("public <REPLACEME>(<ENTER VALUES>)"))
                 {
-                    string newline = line.Replace("<REPLACEME>", builder.ClassName).Replace("(<ENTER VALUES>)", "") + "(";
-                    
+                    string newline = line.Replace("<REPLACEME>", builder.ClassName);
+
+                    string vals = "";
                     foreach (KeyValuePair<string, string> val in builder.Values)
                     {
-                        newline = newline + $"{val.Value} {val.Key.ToLower()}, ";
+                        string doneval = val.Value + " " + val.Key + ",";
+                        vals = vals + doneval;
                     }
 
-                    newline.ReplaceLineEndings("||");
-                    newline.Replace(", ||", ")");
+                    string finalline = newline.Replace("<ENTER VALUES>", vals);
+                    string last = finalline.Replace(",)", ")");
+
+                    result.Add(last);
+                    
+                    continue;
                 }
 
                 if (line.Contains("<CONSTRUCTORREGION>"))
@@ -69,7 +79,11 @@ namespace SimpleLibraryProject.Builders
                     {
                         result.Add($"this.{val.Key} = {val.Key.ToLower()};");
                     }
+                    
+                    continue;
                 }
+                
+                result.Add(line);
             }
 
             string ffn = "";
