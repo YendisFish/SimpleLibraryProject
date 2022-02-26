@@ -1,4 +1,6 @@
 using System.Net.Http.Json;
+using System.Text;
+using SimpleLibraryProject.Security.Types;
 
 namespace SimpleLibraryProject.Web
 {
@@ -17,10 +19,12 @@ namespace SimpleLibraryProject.Web
             return val;
         }
 
-        public static async Task PostPassword(string url, string password, string salt)
+        public static async Task PostPassword(string url, string password)
         {
+            string salt = Encoding.ASCII.GetString(await Security.Hashing.SaltBuilder.BuildSalt());
+            
             HttpClient client = new HttpClient();
-            byte[] hash = await Encryption.HashBuilder.BuildHash(password, salt);
+            HashOutput hash = await Security.Hashing.HashBuilder.GenerateSecureHash(password, salt);
 
             await client.PostAsJsonAsync(url, hash);
         }
