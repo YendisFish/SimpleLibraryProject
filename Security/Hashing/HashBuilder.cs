@@ -12,7 +12,7 @@ namespace SimpleLibraryProject.Security.Hashing
             byte[] base512 = await Encryption.HashBuilder.BuildHash512(await Encryption.Misc.ByteArrayToString(basehash), salt);
 
             string torand = Encoding.ASCII.GetString(base512);
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 50000; i++)
             {
                 string val1 = await Encryption.Misc.ReverseSequence(Encoding.ASCII.GetString(await Encryption.HashBuilder.BuildHash(torand, salt)));
                 string val2 = Encoding.ASCII.GetString(await Encryption.HashBuilder.BuildHash512(val1, salt));
@@ -23,10 +23,11 @@ namespace SimpleLibraryProject.Security.Hashing
             string hmone = Encoding.ASCII.GetString(await Encryption.HashBuilder.BuildHashHM512(revrand, salt));
 
             string ret = torand;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 50000; i++)
             {
                 string val1 = Encoding.ASCII.GetString(await Encryption.HashBuilder.BuildHash512(ret, salt));
                 string val2 = await Encryption.Misc.ReverseSequence(Encoding.ASCII.GetString(await Encryption.HashBuilder.BuildHash(val1, salt)));
+                string val3 = Encoding.ASCII.GetString(await Encryption.HashBuilder.BuildHashMD5(val2, salt));
                 ret = val2;
             }
 
