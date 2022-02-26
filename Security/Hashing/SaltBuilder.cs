@@ -11,8 +11,8 @@ namespace SimpleLibraryProject.Security.Hashing
             
             byte[] salt = new byte[6000];
             generator.GetBytes(salt);
-            
-            return await Encryption.HashBuilder.BuildHash(Encoding.ASCII.GetString(salt), "abcdefg");
+
+            return salt;
         }
     }
 }
