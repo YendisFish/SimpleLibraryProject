@@ -49,7 +49,7 @@ namespace SimpleLibraryProject.Builders
                 {
                     foreach (KeyValuePair<string, string> val in builder.Values)
                     {
-                        result.Add(val.Value + " " + val.Key + " " + " { get; set; }");
+                        result.Add(val.Value + " " + val.Key + " { get; set; }");
                     }
                     continue;
                 }
