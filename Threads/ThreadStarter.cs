@@ -10,5 +10,20 @@ namespace SimpleLibraryProject.Threads
             Thread thread = new Thread(ts);
             thread.Start();
         }
+
+        public static async Task RunRawAction(Action action)
+        {
+            ThreadStart ts = new(() => action());
+            Thread thread = new Thread(ts);
+            thread.Start();
+        }
+        
+        public static async Task DistributedActions(DistributedThreadBuilder builder)
+        {
+            foreach (Action action in builder.Actions)
+            {
+                await RunRawAction(action);
+            }
+        }
     }
 }
