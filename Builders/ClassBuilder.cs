@@ -49,7 +49,8 @@ namespace SimpleLibraryProject.Builders
                 {
                     foreach (KeyValuePair<string, string> val in builder.Values)
                     {
-                        result.Add(val.Value + " " + val.Key + " { get; set; }");
+                        string whitespace = "       ";
+                        result.Add(whitespace + val.Value + " " + val.Key + " { get; set; }");
                     }
                     continue;
                 }
@@ -77,7 +78,8 @@ namespace SimpleLibraryProject.Builders
                 {
                     foreach (KeyValuePair<string, string> val in builder.Values)
                     {
-                        result.Add($"this.{val.Key} = {val.Key.ToLower()};");
+                        string whitespace = "           ";
+                        result.Add($"{whitespace}this.{val.Key} = {val.Key.ToLower()};");
                     }
                     
                     continue;
