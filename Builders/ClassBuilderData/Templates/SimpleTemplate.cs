@@ -6,6 +6,7 @@ namespace SimpleLibraryProject.Builders.ClassBuilderData.Templates
         {
             List<string> ret = new();
             ret.Add("<IMPORTREGION>");
+            ret.Add("");
             ret.Add("namespace <REPLACEME>");
             ret.Add("{");
             ret.Add("   public class <REPLACEME>");

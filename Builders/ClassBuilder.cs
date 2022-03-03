@@ -88,17 +88,17 @@ namespace SimpleLibraryProject.Builders
                 result.Add(line);
             }
 
-            string ffn = "";
+            string ret = "";
             
             if (builder.Filename.Contains(".cs"))
             {
-                ffn = builder.Filename;
+                ret = builder.Filename;
             } else if (!builder.Filename.Contains(".cs"))
             {
-                ffn = builder.Filename + ".cs";
+                ret = builder.Filename + ".cs";
             }
 
-            await File.WriteAllLinesAsync(ffn, result);
+            await File.WriteAllLinesAsync(ret, result);
         }
     }
 }
