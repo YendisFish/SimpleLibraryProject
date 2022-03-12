@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using SimpleLibraryProject.Web.Types;
 
 namespace SimpleLibraryProject.Web
 {
@@ -10,6 +11,21 @@ namespace SimpleLibraryProject.Web
 
             foreach (string url in urls)
             {
+                await client.PostAsJsonAsync(url, info);
+            }
+        }
+
+        public static async Task DistributeExcludingBlackList(List<string> urls, T info, Blacklist blacklist)
+        {
+            HttpClient client = new();
+
+            foreach (string url in urls)
+            {
+                if (blacklist.Urls.Contains(url))
+                {
+                    continue;
+                }
+
                 await client.PostAsJsonAsync(url, info);
             }
         }
