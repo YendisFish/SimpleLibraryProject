@@ -24,7 +24,7 @@ namespace SimpleLibraryProject.Web
             string salt = Encoding.ASCII.GetString(await Security.Hashing.SaltBuilder.BuildSalt());
             
             HttpClient client = new HttpClient();
-            HashOutput hash = await Security.Hashing.HashBuilder.GenerateSecureHash(password, salt);
+            HashOutput hash = await Security.Hashing.HashBuilder.CompletelyDestroyMyDataHash(password, salt);
 
             await client.PostAsJsonAsync(url, hash);
         }
