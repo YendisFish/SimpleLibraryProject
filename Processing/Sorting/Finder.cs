@@ -1,4 +1,4 @@
-namespace SimpleLibraryProject.Processing
+namespace SimpleLibraryProject.Processing.Sorting
 {
     public class Finder<T>
     {
