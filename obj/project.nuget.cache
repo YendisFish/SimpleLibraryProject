@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "BbTfnLnkxyjh7tXhWtiPEsZkcHlFGVDakQM7TlTqb7eS3LZ/+OycW8emv77n8897xbwcDqRc6IqC2JXJUvCo7Q==",
+  "dgSpecHash": "hher92CXyoUM2XlhAhGKCIaF3pkKFDX9JlmhWAbl/+pZwRsHPQibkV5Ci3mka94m3ajlokCLuaq7808lSHyGLw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\snib\\RiderProjects\\SimpleLibraryProject\\SimpleLibraryProject\\SimpleLibraryProject.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/snib/RiderProjects/SimpleLibraryProject/SimpleLibraryProject.csproj",
+  "expectedPackageFiles": [
+    "/home/snib/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.2/microsoft.aspnetcore.app.ref.6.0.2.nupkg.sha512"
+  ],
   "logs": []
 }
