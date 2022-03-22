@@ -11,7 +11,7 @@
     "/home/snib/.nuget/packages/": {}
   },
   "project": {
-    "version": "2022.1.0",
+    "version": "2022.3.0",
     "restore": {
       "projectUniqueName": "/home/snib/RiderProjects/SimpleLibraryProject/SimpleLibraryProject.csproj",
       "projectName": "SimpleLibraryProject",
