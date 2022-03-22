@@ -97,19 +97,9 @@ namespace SimpleLibraryProject.Processing.Sorting
                     nums.Add(val.Key, 1);
                 }
             }
-
-
-            Dictionary<Tkey, int> converted = new();
+            
             IOrderedEnumerable<KeyValuePair<Tkey, int>> sd = nums.OrderByDescending(x => x.Value);
-
-            Dictionary<Tkey, Tval> ret = new();
-
-            foreach (KeyValuePair<Tkey, int> val in sd)
-            {
-                converted.Add(val.Key, val.Value);
-            }
-
-            IOrderedEnumerable<KeyValuePair<Tkey, Tval>> sorted = values.OrderBy(x => converted[x.Key]);
+            IOrderedEnumerable<KeyValuePair<Tkey, Tval>> sorted = values.OrderBy(x => nums[x.Key]);
 
             values = new List<KeyValuePair<Tkey, Tval>>();
 
