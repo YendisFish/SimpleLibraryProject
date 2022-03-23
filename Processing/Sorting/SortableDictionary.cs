@@ -98,7 +98,6 @@ namespace SimpleLibraryProject.Processing.Sorting
                 }
             }
             
-            IOrderedEnumerable<KeyValuePair<Tkey, int>> sd = nums.OrderByDescending(x => x.Value);
             IOrderedEnumerable<KeyValuePair<Tkey, Tval>> sorted = values.OrderBy(x => nums[x.Key]);
 
             values = new List<KeyValuePair<Tkey, Tval>>();
