@@ -21,8 +21,7 @@ namespace SimpleLibraryProject.Processing.Sorting
             KeyValuePair<Tkey, Tval> toinsert = new KeyValuePair<Tkey, Tval>(key, val);
             values.Add(toinsert);
         }
-        
-        
+
         public async Task InsertAsync(KeyValuePair<Tkey, Tval> val)
         {
             values.Add(val);
@@ -79,32 +78,6 @@ namespace SimpleLibraryProject.Processing.Sorting
             foreach (Tkey val in keys)
             {
                 values.Add(new KeyValuePair<Tkey, Tval>(val, default));
-            }
-        }
-
-        public async Task OrderByOccurrence()
-        {
-            Dictionary<Tkey, int> nums = new();
-
-            foreach (KeyValuePair<Tkey, Tval> val in values)
-            {
-                if (nums.ContainsKey(val.Key))
-                {
-                    nums[val.Key] = nums[val.Key] + 1;
-                }
-                else
-                {
-                    nums.Add(val.Key, 1);
-                }
-            }
-            
-            IOrderedEnumerable<KeyValuePair<Tkey, Tval>> sorted = values.OrderBy(x => nums[x.Key]);
-
-            values = new List<KeyValuePair<Tkey, Tval>>();
-
-            foreach (KeyValuePair<Tkey, Tval> val in sorted)
-            {
-                values.Add(val);
             }
         }
         
@@ -188,6 +161,30 @@ namespace SimpleLibraryProject.Processing.Sorting
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public async Task<Dictionary<Tkey, Tval>> ToDictionary()
+        {
+            Dictionary<Tkey, Tval> ret = new();
+
+            foreach (KeyValuePair<Tkey, Tval> val in values)
+            {
+                ret.Add(val.Key, val.Value);
+            }
+
+            return ret;
+        }
+        
+        public static async Task<SortableDictionary<Tkey, Tval>> FromDictionary(Dictionary<Tkey, Tval> dict)
+        {
+            SortableDictionary<Tkey, Tval> ret = new();
+
+            foreach (KeyValuePair<Tkey, Tval> val in dict)
+            {
+                await ret.InsertAsync(val);
+            }
+
+            return ret;
         }
     }
 }
