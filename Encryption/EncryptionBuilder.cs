@@ -1,11 +1,13 @@
+using System.Security.Cryptography;
+
 namespace SimpleLibraryProject.Encryption
 {
     public class EncryptionBuilder
     {
-        public static async Task<string> OverEncrypt(string input, string key, string salt, int overtime)
+        public static async Task<string> OverEncrypt(string input, string key, string salt, int repetitions)
         {
             string currentval = input;
-            for (int i = 0; i < overtime; i++)
+            for (int i = 0; i < repetitions; i++)
             {
                 currentval = currentval + await SimpleEncrypt(currentval, key, salt);
             }
