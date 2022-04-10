@@ -186,5 +186,37 @@ namespace SimpleLibraryProject.Processing.Sorting
 
             return ret;
         }
+
+        public async Task SortByAscendingKey()
+        {
+            try
+            {
+                if (typeof(Tval) == typeof(int))
+                {
+                    IOrderedEnumerable<KeyValuePair<Tkey, Tval>> sorted = values.OrderByDescending(x => x.Key);
+                    values = new List<KeyValuePair<Tkey, Tval>>();
+
+                    List<KeyValuePair<Tkey, Tval>> forcount = new();
+
+                    foreach (KeyValuePair<Tkey, Tval> val in sorted)
+                    {
+                        forcount.Add(val);
+                    }
+
+                    for (int i = forcount.Count; i <= 0; i--)
+                    {
+                        values.Add(forcount[i]);
+                    }
+                }
+                else
+                {
+                    throw new Exception("Key must be of type integer");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

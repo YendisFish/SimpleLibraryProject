@@ -26,5 +26,34 @@ namespace SimpleLibraryProject.Processing.CSV
                 this.SectorList?.Add(ln ?? null);
             }
         }
+
+        public async Task WriteToFile(string path)
+        {
+            string lntowrite = "";
+            
+            foreach (CSVLine line in SectorList)
+            {
+                await line.Sectors.SortByAscendingKey();
+                foreach (KeyValuePair<int, string> sector in line.Sectors)
+                {
+                    if (sector.Key == 1)
+                    {
+                        lntowrite = lntowrite + sector.Value + ",";
+                        continue;
+                    }
+
+                    if (sector.Key == line.Sectors.Count - 1)
+                    {
+                        lntowrite = lntowrite + sector.Value;
+                        continue;
+                    }
+
+                    lntowrite = lntowrite + sector.Value + ",";
+                }
+                
+                File.WriteAllText(path, lntowrite);
+                lntowrite = "";
+            }
+        }
     }
 }
